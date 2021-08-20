@@ -57,18 +57,22 @@ function Tierlist(props) {
                 )                        
                 if( (x + 1) % cardLimit == 0){
                     deckArr.push(
-                        <div 
-                            className = 'deck-container'
-                            style = {{backgroundImage: `url(${heroImgUrls[x]})`}}//working on this rn bro
-                        >        
-                            <img 
-                                
-                                className = 'class-image-icon'
-                                src = {classIconUrls[x]}
-                                  alt = ''
-                            />
-                            <div className = 'cards-text'>CORE CARDS</div>
-                            <span className = 'card-icon-container' > {cardArr} </span>
+                        <div className = 'deck-container'>       
+                            <div className = 'img-container'>
+                                <div >
+                                    <img className ='deck-container-img' src= {heroImgUrls[x]} alt="" /> 
+                                </div>
+                                {/* <div className = 'deck-container-img'>style = {{backgroundImage: `url(${heroImgUrls[x]})`}}</div> */}
+                                <div >
+                                    <img className = 'class-image-icon' src = {classIconUrls[x]} alt = ''/>  
+                                </div>  
+                            </div>
+
+                            <div className = 'core-cards-and-icons'>
+                                <span className = 'cards-text'>CORE CARDS</span>
+                                <span className = 'card-icon-container' > {cardArr} </span>
+                            </div>
+                            <button className = 'view-deck'>VIEW MOST POPULAR DECK</button>
                         </div>
                     )
                     cardArr = []
@@ -84,7 +88,8 @@ function Tierlist(props) {
         }
         renderTier(1)
         renderTier(2)
-
+        renderTier(3)
+        renderTier(4)
         return(
             <div 
                 className = 'tier-list'
