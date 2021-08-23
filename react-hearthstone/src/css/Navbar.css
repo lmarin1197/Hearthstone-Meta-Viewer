@@ -1,0 +1,57 @@
+#nav{
+    align-self: flex-start;
+    top: 0px;
+    position: sticky;
+    height: 0;
+    width: 16%;
+    font-size: 15px;
+}
+.nav-header{
+    font-size: 17px;
+    text-align: center;
+    padding: 15px 0px;
+}
+.navbar{
+    background: #1d3657;
+    color: white;
+}
+.section-title{
+    padding: 4px 0 4px 10px;
+    background: rgb(12, 34, 62);
+    color: rgb(38, 163, 219);
+}
+
+.section-list{
+    padding-left: 0;
+    margin: 0;
+    list-style-type: none; 
+}
+li{
+    padding: 10px 0 10px 10px;
+    border-bottom: 1px solid black;
+}
+li a{
+    text-decoration: none;
+    color: white;
+}
+.legend{
+    color: rgb(255, 176, 13);
+    padding: 0;
+}
+.legend img{
+    width: 30px;
+    height: auto;
+    
+}
+.legend-text{
+    position: absolute;
+    margin-top: 5px;
+    
+}
+#home{
+    text-align: center;
+}
+#home a{
+    background: rgb(12, 34, 62);
+    color: white;
+}

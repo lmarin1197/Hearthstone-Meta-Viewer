@@ -1,6 +1,8 @@
 import React, {useEffect , useState} from 'react';
+import {Link} from 'react-router-dom';
+import '../css/Tierlist.css';
 
-function Tierlist(props) {
+function Tierlist() {
   
     const [cards , setCards] = useState(null);
     const cardUrl = 'https://api.hearthstonejson.com/v1/88998/enUS/cards.collectible.json';
@@ -9,10 +11,12 @@ function Tierlist(props) {
     let heroImgUrls = []
     const deckContainerImgUrl = 'https://art.hearthstonejson.com/v1/256x/';
     //                           https://art.hearthstonejson.com/v1/256x/HERO_04d.jpg
-    const cardLimit = 8 , metaDecks = 5;
+    const cardLimit = 8;
     let cardArr = []
     let deckArr = [];
     let tierArr = [];
+    let fullCardIn = [];
+    let cardClass = [];
 
     const getCard = (url) =>{
         fetch(url)
@@ -21,8 +25,8 @@ function Tierlist(props) {
             let data = res;
             data.map(item => {
                 item.image = `https://art.hearthstonejson.com/v1/tiles/${item.id}.jpg`;
-                //"https://art.hearthstonejson.com/v1/tiles/DMF_238.jpg"----------------------FULL CARD ART
-                //https://art.hearthstonejson.com/v1/render/latest/enUS/512x/${item.id}.png---CARD TILE ART
+                //"https://art.hearthstonejson.com/v1/tiles/DMF_238.jpg"----------------------CARD TILE ART
+                //https://art.hearthstonejson.com/v1/render/latest/enUS/512x/${item.id}.png---FULL CARD ART
             })
             setCards(data)
         })
@@ -33,25 +37,29 @@ function Tierlist(props) {
     useEffect(() => {
         getCard(cardUrl)
     },[])
-        
+    const cardIndex = () =>{
+        let rand = Math.floor(Math.random() * (cards.length))
+        fullCardIn.push(rand)
+        return rand;
+    }
     if(cards == null){
         return null
     }
     
     else{
-        const renderTier = (tierNum) =>{
-            cards.map((e , i) => {
-                if(e.id.includes("HERO")){
+        const renderTier = (tierNum , metaDecks) =>{           
+            cards.map((e , i) => {    
+                if(e.id.includes("HERO") ){
+                    cardClass.push(e.cardClass);
                     classIconUrls.push(`${cardImgUrl}${e.cardClass}.png`.toLowerCase()) 
                     heroImgUrls.push(`${deckContainerImgUrl}${cards[i].id}.jpg`)
-                    console.log(heroImgUrls[0])
                 }
             })
             for(let x = 0 ; x < cardLimit * metaDecks ; x++){
                 cardArr.push(  
                     <div 
                         className = 'card-icon-image' 
-                        style = {{backgroundImage: `url(${cards[Math.floor(Math.random() * (cards.length))].image})`}}
+                        style = {{backgroundImage: `url(${cards[cardIndex()].image})`}}
                         alt = ''
                     ></div>  
                 )                        
@@ -62,7 +70,7 @@ function Tierlist(props) {
                                 <div >
                                     <img className ='deck-container-img' src= {heroImgUrls[x]} alt="" /> 
                                 </div>
-                                {/* <div className = 'deck-container-img'>style = {{backgroundImage: `url(${heroImgUrls[x]})`}}</div> */}
+                                
                                 <div >
                                     <img className = 'class-image-icon' src = {classIconUrls[x]} alt = ''/>  
                                 </div>  
@@ -72,7 +80,7 @@ function Tierlist(props) {
                                 <span className = 'cards-text'>CORE CARDS</span>
                                 <span className = 'card-icon-container' > {cardArr} </span>
                             </div>
-                            <button className = 'view-deck'>VIEW MOST POPULAR DECK</button>
+                            <button className = 'view-deck'><Link to = {`/deck/${cardClass[x]}`} key = {cardClass[x]}>VIEW MOST POPULAR DECK</Link> </button>
                         </div>
                     )
                     cardArr = []
@@ -80,26 +88,23 @@ function Tierlist(props) {
       
             }
             tierArr.push(
-            <div className = 'tier-container'>
-                <div className = 'tier-header' >tier {tierNum}</div>
-                {deckArr}
-            </div>)
+                <div className = 'tier-container'>
+                    <div className = 'tier-header' >tier {tierNum}</div>
+                    {deckArr}
+                </div>
+            )
             deckArr = []            
         }
-        renderTier(1)
-        renderTier(2)
-        renderTier(3)
-        renderTier(4)
+        renderTier(1 , 4)
+        renderTier(2 , 3)
+        renderTier(3 , 2)
+        renderTier(4 , 3)
         return(
-            <div 
-                className = 'tier-list'
-            >
+            <div className = 'tier-list' >
                 {tierArr}
             </div>
-                //{deckArr} 
-                
         )    
-        // {/* <div className = 'card-icon-container' > {cardArr} </div> */}    
+
     }
 }
 
