@@ -15,7 +15,7 @@ function Tierlist() {
     let cardArr = []
     let deckArr = [];
     let tierArr = [];
-    let fullCardIn = [];
+    // let fullCardIn = [];
     let cardClass = [];
 
     const getCard = (url) =>{
@@ -39,7 +39,7 @@ function Tierlist() {
     },[])
     const cardIndex = () =>{
         let rand = Math.floor(Math.random() * (cards.length))
-        fullCardIn.push(rand)
+        // fullCardIn.push(rand)
         return rand;
     }
     if(cards == null){
@@ -47,6 +47,7 @@ function Tierlist() {
     }
     
     else{
+        console.log(cards.length)
         const renderTier = (tierNum , metaDecks) =>{           
             cards.map((e , i) => {    
                 if(e.id.includes("HERO") ){

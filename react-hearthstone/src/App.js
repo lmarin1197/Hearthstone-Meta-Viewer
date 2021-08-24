@@ -15,11 +15,8 @@ function App() {
         />
         <Route exact path = '/deck/:id' 
           component = {Decklist}
-          // render = {(routerProps) => (
-          //   < Decklist match = {routerProps.match}/>
-          // )}
         />
-        <p id = 'credits'>Credits: <a href = 'https://git.generalassemb.ly/dguma'>Dylan Guma</a>, <a href = 'https://git.generalassemb.ly/jexxe'>Jesse Watson</a>, <a href = 'https://git.generalassemb.ly/evolvd444'>Omar Abudeh</a></p>
+        {/* <p id = 'credits'>Credits: <a href = 'https://git.generalassemb.ly/dguma'>Dylan Guma</a>, <a href = 'https://git.generalassemb.ly/jexxe'>Jesse Watson</a>, <a href = 'https://git.generalassemb.ly/evolvd444'>Omar Abudeh</a></p> */}
       </div>
       
     </div>
